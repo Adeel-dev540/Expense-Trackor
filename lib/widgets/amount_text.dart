@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/currency_helper.dart';
 
 class AmountText extends StatelessWidget {
   final double amount;
@@ -15,7 +16,7 @@ class AmountText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '${isCredit ? '+' : '-'} Rs. ${amount.toStringAsFixed(2)}',
+      CurrencyHelper.formatWithSign(amount, isCredit: isCredit),
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: FontWeight.bold,

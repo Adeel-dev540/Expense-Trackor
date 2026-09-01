@@ -124,7 +124,10 @@ class TransactionProvider extends ChangeNotifier {
 
   Future<bool> updateTransaction({
     required String transactionId,
-    required Map<String, dynamic> data,
+    required String categoryId,
+    required double amount,
+    required String description,
+    required DateTime date,
   }) async {
     _setLoading(true);
     _errorMessage = null;
@@ -132,7 +135,10 @@ class TransactionProvider extends ChangeNotifier {
     try {
       await _transactionService.updateTransaction(
         transactionId: transactionId,
-        data: data,
+        categoryId: categoryId,
+        newAmount: amount,
+        description: description,
+        date: date,
       );
 
       return true;

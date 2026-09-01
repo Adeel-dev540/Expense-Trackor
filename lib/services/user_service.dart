@@ -32,15 +32,35 @@ Future<void>createUserProfile({
 
 }
 
-//Get user profile
-Future<DocumentSnapshot<Map<String, dynamic>>>getUserProfile()async{
-    final User? user =_auth.currentUser;
+// Get user profile
+Future<DocumentSnapshot<Map<String, dynamic>>> getUserProfile() async {
+    final User? user = _auth.currentUser;
 
-    if(user==null){
+    if (user == null) {
       throw Exception('User is not logged in');
     }
 
-    return await _firestore.collection("users").doc(user.uid).get();
+    final docRef = _firestore.collection("users").doc(user.uid);
+    final docSnap = await docRef.get();
+
+    if (!docSnap.exists) {
+      final defaultName = user.email?.split('@').first ?? 'User';
+      final formattedName = defaultName.isNotEmpty
+          ? defaultName[0].toUpperCase() + defaultName.substring(1)
+          : 'User';
+
+      await docRef.set({
+        'uid': user.uid,
+        'name': formattedName,
+        'email': user.email ?? '',
+        'phone': '',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      return await docRef.get();
+    }
+
+    return docSnap;
   }
 
 // Update user profile
@@ -54,10 +74,12 @@ Future<DocumentSnapshot<Map<String, dynamic>>>getUserProfile()async{
       throw Exception('User is not logged in');
     }
 
-    await _firestore.collection('users').doc(user.uid).update({
+    await _firestore.collection('users').doc(user.uid).set({
       'name': name,
       'phone': phone,
-    });
+      'email': user.email ?? '',
+      'updatedAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
   }
 
   // Delete user profile

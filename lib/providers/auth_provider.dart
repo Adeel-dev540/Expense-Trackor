@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:expense_trackor/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -105,14 +103,14 @@ Future<String?>?forgot({
 }
 
 //LOGOUT
-Future<void>? logout()async{
+Future<void> logout() async {
      try{
        setLoading(true);
        await _authService.logout();
-       return null;
      }
      catch(e){
-       print('Logout error: $e');}
+       debugPrint('Logout error: $e');
+     }
      finally{
        setLoading(false);
      }

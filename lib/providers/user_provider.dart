@@ -14,6 +14,39 @@ class UserProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   Map<String, dynamic>? get userData => _userData;
 
+  String get displayName {
+    final name = _userData?['name']?.toString().trim();
+    if (name != null && name.isNotEmpty) {
+      return name;
+    }
+    final email = _userService.currentUser?.email;
+    if (email != null && email.isNotEmpty) {
+      final username = email.split('@').first;
+      if (username.isNotEmpty) {
+        return username[0].toUpperCase() + username.substring(1);
+      }
+    }
+    return 'User';
+  }
+
+  String get email =>
+      _userData?['email']?.toString() ??
+      _userService.currentUser?.email ??
+      '';
+
+  String get phone => _userData?['phone']?.toString() ?? '';
+
+  String get initials {
+    final name = displayName;
+    final parts = name.trim().split(RegExp(r'\s+'));
+    if (parts.length >= 2 && parts[0].isNotEmpty && parts[1].isNotEmpty) {
+      return '${parts[0][0]}${parts[1][0]}'.toUpperCase();
+    } else if (parts.isNotEmpty && parts[0].isNotEmpty) {
+      return parts[0][0].toUpperCase();
+    }
+    return 'U';
+  }
+
   Future<bool> createUserProfile({
     required String name,
     required String email,

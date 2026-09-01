@@ -6,11 +6,15 @@ import 'package:expense_trackor/providers/transaction_provider.dart';
 import 'package:expense_trackor/providers/user_provider.dart';
 import 'package:expense_trackor/screens/accounts_screen.dart';
 import 'package:expense_trackor/screens/add_account_screen.dart';
-
+import 'package:expense_trackor/screens/add_credit_screen.dart';
+import 'package:expense_trackor/screens/add_debit_screen.dart';
+import 'package:expense_trackor/screens/add_transfer_screen.dart';
 import 'package:expense_trackor/screens/forgot_screen.dart';
 import 'package:expense_trackor/screens/dashboard_screen.dart';
 import 'package:expense_trackor/screens/login_screen.dart';
+import 'package:expense_trackor/screens/profile_screen.dart';
 import 'package:expense_trackor/screens/signup_screen.dart';
+import 'package:expense_trackor/screens/transactions_screen.dart';
 import 'package:expense_trackor/testing.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -66,13 +70,17 @@ class MyApp extends StatelessWidget {
 
       routes: {
         '/DashboardScreen': (context) => const DashboardScreen(),
-        '/AccountsScreen':(context)=>AccountsScreen(),
-        '/AddAccountScreen':(context)=>AddAccountScreen(),
+        '/AccountsScreen': (context) => const AccountsScreen(),
+        '/TransactionsScreen': (context) => const TransactionsScreen(),
+        '/ProfileScreen': (context) => const ProfileScreen(),
+        '/AddAccountScreen': (context) => AddAccountScreen(),
+        '/AddCreditScreen': (context) => AddCreditScreen(),
+        '/AddDebitScreen': (context) => AddDebitScreen(),
+        '/AddTransferScreen': (context) => AddTransferScreen(),
         '/LoginScreen': (context) => LoginScreen(),
-        '/SignupScreen': (context) =>  SignupScreen(),
-        '/ForgotScreen': (context) =>  ForgotScreen(),
-        '/DateHelperDemoScreen': (context) =>
-         DateHelperDemoScreen(),
+        '/SignupScreen': (context) => SignupScreen(),
+        '/ForgotScreen': (context) => ForgotScreen(),
+        '/DateHelperDemoScreen': (context) => DateHelperDemoScreen(),
       },
     );
   }
