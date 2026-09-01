@@ -327,19 +327,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       accountProvider: accountProvider,
                     ),
 
-                  const SizedBox(height: 28),
-
-                  // ------------------------------------------------------
-                  // Spending Overview
-                  // ------------------------------------------------------
-
-                  const SectionHeader(
-                    title: 'Spending Overview',
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  const _OverviewCard(),
                 ],
               ),
             );
